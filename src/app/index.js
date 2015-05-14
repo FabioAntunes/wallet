@@ -12,7 +12,8 @@ angular.module('wallet', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     $urlRouterProvider.otherwise('/');
 
     localStorageServiceProvider.setPrefix('wallet');
-  }).run(function (Amounts){
-    Amounts.init();  	
+  }).run(function (Amounts, Currency){
+    Amounts.init();
+    Currency.init();
   })
 ;

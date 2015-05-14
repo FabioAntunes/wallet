@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('wallet')
-  .controller('ModalCtrl', function ($scope, Amounts) {
-    $scope.amounts = Amounts.values;
+  .controller('AmountsCtrl', function ($scope, Amounts) {
 
     $scope.amount = null;
     $scope.date = null;
     $scope.amountType = true;
 
-    $scope.persistAmount = function(){
-      Amounts.add($scope.amount, $scope.date);
+    $scope.submitAmount = function(){
+      $scope.amountType ? Amounts.add($scope.amount, $scope.date) : Amounts.remove($scope.amount, $scope.date);
+      $scope.$hide();
     };
 
     $scope.calcTotal = function(amountInput){

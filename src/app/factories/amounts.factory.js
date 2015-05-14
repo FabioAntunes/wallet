@@ -3,14 +3,13 @@
 angular.module('wallet')
   .factory('Amounts', ['localStorageService', function(localStorageService){
     var amounts = {
-      income: [],
-      expense: [],
+      values: [],
       total: 0
     };
 
-    function _persist(amountObj, type){
-      amounts[type].push(amountObj);
-      return localStorageService.set(type, amounts[type]);
+    function _persist(amountObj){
+      amounts.values.push(amountObj);
+      return localStorageService.set('values', amounts.values);
     }
 
     function _add(amount, date){
@@ -18,7 +17,7 @@ angular.module('wallet')
         amount: amount,
         date: date,
         isPositive: true
-      }, 'income');
+      });
 
     }
 
@@ -27,24 +26,24 @@ angular.module('wallet')
         amount: amount,
         date: date,
         isPositive: false
-      }, 'expense');
+      });
 
     }
 
     function _reset () {
       localStorageService.clearAll();
+      amounts.values = [];
+      amounts.total = 0;
+      _init();
     }
 
     function _init(){
       var keys = localStorageService.keys();
-      if(keys['expense'] === undefined){
-        localStorageService.set('expense', amounts.expense);
+      if(!~keys.indexOf('values')){
+        localStorageService.set('values', amounts.values);
+      }else{
+        amounts.values = localStorageService.get('values');
       }
-
-      if(keys['expense'] === undefined){
-        localStorageService.set('income', amounts.income);
-      }
-
     }
 
     return {

@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" ng-controller="ModalCtrl">
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" ng-controller="AmountsCtrl">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,7 +6,7 @@
         <h4 class="modal-title">Insert amount</h4>
       </div>
       <div class="modal-body">
-        <form action="" method="POST" class="form-horizontal" role="form" name="amountForm" novalidate>
+        <form class="form-horizontal" role="form" name="amountForm" novalidate ng-submit="submitAmount()">
             <div class="form-group" ng-class="{ 'has-error': amountForm.amount.$invalid && !amountForm.amount.$pristine}">
               <label for="amount" class="col-xs-3 control-label">Amount:</label>
               <div class="col-xs-9">
@@ -16,10 +16,12 @@
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error': amountForm.date.$invalid && !amountForm.date.$pristine}">
               <label for="amount" class="col-xs-3 control-label">Date:</label>
               <div class="col-xs-9">
-                <input type="text" class="form-control" ng-model="date" name="Date" bs-datepicker required data-maxDate="today" data-dateType="date">
+                <input type="text" class="form-control" ng-model="date" name="date" bs-datepicker required data-max-date="today" data-date-type="date" data-date-format="d-M-yyyy">
+                <p ng-show="amountForm.date.$invalid && !amountForm.date.$pristine && !amountForm.date.$error.max" class="help-block">Invalid this date it is</p>
+                <p ng-show="amountForm.date.$error.max" class="help-block">The future is bright, but it can't handle amounts</p>
               </div>
             </div>
             
@@ -37,7 +39,7 @@
             <div class="form-group" ng-class="{ 'has-error' : amountForm.amount.$error.validAmount }">
               <label for="amount" class="col-xs-3 control-label">Total after:</label>
               <div class="col-xs-9">
-                <p class="form-control-static" ng-bind="calcTotal(amountForm.amount)"></p> 
+                <p class="form-control-static"><span ng-bind="calcTotal(amountForm.amount)"></span> <i class="{{ currentCurrency.html }}"></i></p> 
                 <p ng-show="amountForm.amount.$error.validAmount" class="help-block">Total amount can't be negative</p>
               </div>
             </div>

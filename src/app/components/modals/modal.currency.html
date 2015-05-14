@@ -1,0 +1,33 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" ng-controller="CurrencyCtrl">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Choose currency</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" name="currencyForm" novalidate ng-submit="submitCurrency(formCurrency)">
+
+            <div class="form-group" ng-repeat="currency in currencies" ng-form="innerForm">
+              <div class="col-xs-offset-2 col-xs-10">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="currency" ng-value="currency.id" ng-model="formCurrency"> {{ currency.name }} <i class="{{ currency.html }}"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-9 col-xs-offset-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
