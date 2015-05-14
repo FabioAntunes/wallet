@@ -39,7 +39,7 @@
             <div class="form-group" ng-class="{ 'has-error' : amountForm.amount.$error.validAmount }">
               <label for="amount" class="col-xs-3 control-label">Total after:</label>
               <div class="col-xs-9">
-                <p class="form-control-static"><span ng-bind="calcTotal(amountForm.amount)"></span> <i class="{{ currentCurrency.html }}"></i></p> 
+                <p class="form-control-static"><span ng-bind="calcTotal(amountForm.amount)"></span> <i class="{{ currenciesOptions.currentCurrency.html }}"></i></p> 
                 <p ng-show="amountForm.amount.$error.validAmount" class="help-block">Total amount can't be negative</p>
               </div>
             </div>

@@ -3,8 +3,7 @@
 angular.module('wallet')
   .controller('MainCtrl', function ($scope, Amounts, Currency, $modal) {
     $scope.amounts = Amounts.values;
-    $scope.currencies = Currency.currenciesOptions.currencies;
-    $scope.currentCurrency = Currency.currenciesOptions.currentCurrency;
+    $scope.currenciesOptions = Currency.currenciesOptions;
 
     var amountModal = $modal({
       scope: $scope,

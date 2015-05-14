@@ -6,13 +6,13 @@
         <h4 class="modal-title">Choose currency</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form" name="currencyForm" novalidate ng-submit="submitCurrency(formCurrency)">
+        <form class="form-horizontal" role="form" name="currencyForm" novalidate ng-submit="submitCurrency()">
 
-            <div class="form-group" ng-repeat="currency in currencies" ng-form="innerForm">
+            <div class="form-group" ng-repeat="currency in currenciesOptions.currencies" ng-form="innerForm">
               <div class="col-xs-offset-2 col-xs-10">
                 <div class="radio">
                   <label>
-                    <input type="radio" name="currency" ng-value="currency.id" ng-model="formCurrency"> {{ currency.name }} <i class="{{ currency.html }}"></i>
+                    <input type="radio" name="currency" ng-value="currency.id" ng-model="$parent.formCurrency"> {{ currency.name }} <i class="{{ currency.html }}"></i>
                   </label>
                 </div>
               </div>

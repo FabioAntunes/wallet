@@ -20,11 +20,11 @@
 		  <tbody>
 		    <tr ng-repeat="value in amounts.values | orderBy:'-date'" ng-init="countTotal(value.isPositive ? value.amount : -value.amount)" ng-class="value.isPositive ? 'success' : 'danger'">
 		      <td>{{ value.date | date:'dd-MM-yyyy'}}</td>
-		      <td class="text-right">{{ value.isPositive ? value.amount : -value.amount}} <i class="{{ currentCurrency.html }}"></i></td>
+		      <td class="text-right">{{ value.isPositive ? value.amount : -value.amount}} <i class="{{ currenciesOptions.currentCurrency.html }}"></i></td>
 		    </tr>
 		    <tr>
 		      <td><strong>Total:</strong></td>
-		      <td class="text-right">{{ amounts.total.toFixed(2) }} <i class="{{ currentCurrency.html }}"></i></td>
+		      <td class="text-right">{{ amounts.total.toFixed(2) }} <i class="{{ currenciesOptions.currentCurrency.html }}"></i></td>
 		    </tr>
 		  </tbody>
 		</table>

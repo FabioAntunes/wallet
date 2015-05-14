@@ -3,10 +3,10 @@
 angular.module('wallet')
   .controller('CurrencyCtrl', function ($scope, Currency) {
 
-    $scope.formCurrency = $scope.currentCurrency.id;
+    $scope.formCurrency = $scope.currenciesOptions.currentCurrency.id;
 
 
-    $scope.submitCurrency = function(teste){
+    $scope.submitCurrency = function(){
       Currency.persist($scope.currencyForm.innerForm.currency.$modelValue);
       $scope.$hide();
     }
