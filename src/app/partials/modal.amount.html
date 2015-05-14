@@ -1,29 +1,50 @@
-<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" ng-controller="ModalCtrl">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header" ng-show="title">
+      <div class="modal-header">
         <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" ng-bind="title"></h4>
+        <h4 class="modal-title">Insert amount</h4>
       </div>
       <div class="modal-body">
-        <form action="" method="POST" class="form-horizontal" role="form">
-            <div class="form-group">
-              <label for="amount" class="col-sm-2 control-label">Amount:</label>
-              <div class="col-sm-10">
-                <input type="number" min="0" step="0.01" class="form-control" id="amount" placeholder="Amount" required>
+        <form action="" method="POST" class="form-horizontal" role="form" name="amountForm" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': amountForm.amount.$invalid && !amountForm.amount.$pristine}">
+              <label for="amount" class="col-xs-3 control-label">Amount:</label>
+              <div class="col-xs-9">
+                <input type="number" min="0" step="0.01" class="form-control" name="amount" id="amount" placeholder="Amount" ng-model="amount" valid-amount required>
+                <p ng-show="amountForm.amount.$error.required && !amountForm.amount.$pristine" class="help-block">Amount is required.</p>
+                <p ng-show="amountForm.amount.$error.number" class="help-block">Not valid number.</p>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="amount" class="col-sm-2 control-label">Date:</label>
-              <div class="col-sm-10">
+              <label for="amount" class="col-xs-3 control-label">Date:</label>
+              <div class="col-xs-9">
                 <input type="text" class="form-control" ng-model="date" name="Date" bs-datepicker required data-maxDate="today" data-dateType="date">
               </div>
             </div>
+            
+            <div class="form-group">
+              <div class="col-xs-9 col-xs-offset-2">
+                <label class="radio-inline">
+                  <input type="radio" name="amountType" data-ng-model="amountType" data-ng-value="true"> Add
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="amountType" data-ng-model="amountType" data-ng-value="false"> Remove
+                </label>
+              </div>
+            </div>
+            
+            <div class="form-group" ng-class="{ 'has-error' : amountForm.amount.$error.validAmount }">
+              <label for="amount" class="col-xs-3 control-label">Total after:</label>
+              <div class="col-xs-9">
+                <p class="form-control-static" ng-bind="calcTotal(amountForm.amount)"></p> 
+                <p ng-show="amountForm.amount.$error.validAmount" class="help-block">Total amount can't be negative</p>
+              </div>
+            </div>
 
             <div class="form-group">
-              <div class="col-xs-10 col-xs-offset-2">
-                <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="col-xs-9 col-xs-offset-3">
+                <button type="submit" class="btn btn-primary" ng-disabled="amountForm.$invalid">Submit</button>
               </div>
             </div>
         </form>

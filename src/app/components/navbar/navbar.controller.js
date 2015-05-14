@@ -6,5 +6,5 @@ angular.module('wallet')
     	if(confirm('Are you sure about it?')){
     		Amounts.reset();    		
     	}
-    }
+    };
   });
